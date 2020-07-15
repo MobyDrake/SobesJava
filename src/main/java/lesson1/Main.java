@@ -21,6 +21,9 @@ public class Main {
         info(square);
         info(circle);
         info(triangle);
+
+        Car car = new Lorry();
+        car.move();
     }
 
     public static void info(Shape shape) {
