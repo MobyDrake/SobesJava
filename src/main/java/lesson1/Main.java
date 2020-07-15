@@ -1,5 +1,11 @@
 package lesson1;
 
+import lesson1.builder.Person;
+import lesson1.shape.Circle;
+import lesson1.shape.Shape;
+import lesson1.shape.Square;
+import lesson1.shape.Triangle;
+
 public class Main {
     public static void main(String[] args) {
         Person person = new Person.Builder()

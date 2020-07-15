@@ -1,4 +1,4 @@
-package lesson1;
+package lesson1.shape;
 
 public class Circle implements Shape{
 
