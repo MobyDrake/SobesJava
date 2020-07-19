@@ -1,8 +1,8 @@
-package lesson2;
+package lesson2.Array;
 
 import java.util.Arrays;
 
-public class MyArrayList<T> implements MyList<T> {
+public class MyArrayList<T> implements MyArray<T> {
 
     private static final int DEFAULT_CAPACITY = 8;
 

@@ -1,6 +1,8 @@
-package lesson2;
+package lesson2.Array;
 
-public interface MyList<T> extends ICollection {
+import lesson2.ICollection;
+
+public interface MyArray<T> extends ICollection {
 
     void add(T value);
     boolean remove(T value);
