@@ -3,7 +3,9 @@ package lesson2;
 public interface ICollection {
 
     boolean isEmpty();
-    boolean isFull();
+    default boolean isFull() {
+        return false;
+    }
     int size();
 
 }
