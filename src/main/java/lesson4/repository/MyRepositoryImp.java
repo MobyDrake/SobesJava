@@ -5,7 +5,7 @@ import lesson4.annotationBd.DbEntity;
 import lesson4.annotationBd.DbId;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 
 public class MyRepositoryImp<T> implements MyRepository<T> {
@@ -29,8 +29,7 @@ public class MyRepositoryImp<T> implements MyRepository<T> {
 
     @Override
     public T getById(Long id) {
-        try {
-            PreparedStatement ps = connection.prepareStatement(String.format("SELECT * FROM %s WHERE id = ?", tableName));
+        try(PreparedStatement ps = connection.prepareStatement(String.format("SELECT * FROM %s WHERE id = ?", tableName))) {
             ps.setLong(1, id);
             ResultSet rs = ps.executeQuery();
             return castIntoT(rs);
@@ -54,30 +53,28 @@ public class MyRepositoryImp<T> implements MyRepository<T> {
     }
 
     private T castIntoT(ResultSet rs) {
-        T us = null;
+        T entity = null;
         DbColumn column;
         try {
-            us = (T) clazz.newInstance();
-            Method[] methods = clazz.getDeclaredMethods();
-            Method method;
+            entity = (T) clazz.getDeclaredConstructor().newInstance();
             Field[] fields = clazz.getDeclaredFields();
             while (rs.next()) {
                 for (Field f : fields) {
                     if (f.isAnnotationPresent(DbId.class)) {
                         f.setAccessible(true);
-                        f.set(us, rs.getLong("id"));
+                        f.set(entity, rs.getLong("id"));
                     }
                     if (f.isAnnotationPresent(DbColumn.class)) {
                         f.setAccessible(true);
                         column = f.getAnnotation(DbColumn.class);
-                        f.set(us, rs.getObject(column.name()));
+                        f.set(entity, rs.getObject(column.name()));
                     }
                 }
             }
 
-        } catch (InstantiationException | IllegalAccessException | SQLException e) {
+        } catch (InstantiationException | IllegalAccessException | SQLException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        return us;
+        return entity;
     }
 }
