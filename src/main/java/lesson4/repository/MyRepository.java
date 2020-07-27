@@ -1,4 +1,4 @@
-package lesson4;
+package lesson4.repository;
 
 public interface MyRepository<T> {
 

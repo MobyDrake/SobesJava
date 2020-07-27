@@ -1,4 +1,4 @@
-package lesson4;
+package lesson4.annotationBd;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DbColumn {
-    String name() default "";
+public @interface DbId {
+
 }

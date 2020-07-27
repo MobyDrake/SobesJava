@@ -1,4 +1,8 @@
-package lesson4;
+package lesson4.repository;
+
+import lesson4.annotationBd.DbColumn;
+import lesson4.annotationBd.DbEntity;
+import lesson4.annotationBd.DbId;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
