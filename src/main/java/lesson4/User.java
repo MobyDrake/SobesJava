@@ -1,10 +1,10 @@
 package lesson4;
 
 import lesson4.annotationBd.DbColumn;
-import lesson4.annotationBd.DbEntity;
+import lesson4.annotationBd.DbTable;
 import lesson4.annotationBd.DbId;
 
-@DbEntity(table = "user_tbl")
+@DbTable(table = "user_tbl")
 public class User {
     @DbId
     private Long id;
