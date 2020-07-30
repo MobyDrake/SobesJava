@@ -1,6 +1,7 @@
 package lesson5;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -10,6 +11,13 @@ public class StudentDao {
         return HibernateSessionFactory.getSessionFactory()
                 .openSession()
                 .get(Student.class, id);
+    }
+
+    public Student findByName(String name) {
+       Session session = HibernateSessionFactory.getSessionFactory().openSession();
+        Query query = session.createQuery("from Student where name = :name");
+        query.setParameter("name", name);
+        return (Student) query.getSingleResult();
     }
 
     public void save(Student student) {

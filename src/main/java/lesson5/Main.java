@@ -13,13 +13,28 @@ public class Main {
             dao.save(new Student("Bob - " + (i+1), i));
         }
 
+        //сохранение
+        Student student = new Student("Miky", 4);
+        dao.save(student);
+
+        //поиск по имени
+        student = dao.findByName("Bob - 3");
+        System.out.println(student);
+
+        //обновление
+        student.setName("Vova");
+        dao.update(student);
+
+
+        //получение всех записей
         students = dao.findAll();
 
         for (Student st : students) {
             System.out.println(st);
         }
 
-
+        //удаление всех записей
+        students = dao.findAll();
         dao.delete(students);
 
     }
